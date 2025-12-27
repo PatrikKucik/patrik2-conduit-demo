@@ -17,3 +17,24 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: 'Home' }).click();
   await page.close();
 });
+
+test("Conditional theme click", async ({ page }) => {
+  await page.goto("https://playground.bondaracademy.com/pages/iot-dashboard");
+
+  // 1️⃣ Open the dropdown (the theme button always shows current theme)
+  await page.getByRole("button", { name: /(Light|Dark|Cosmic|Corporate)/ }).click();
+
+  // 2️⃣ Now options are visible — conditional click works
+  const themes = ["Light", "Dark", "Cosmic", "Corporate"];
+
+  for (const theme of themes) {
+    const el = page.getByText(theme, { exact: true });
+
+    if (await el.isVisible().catch(() => false)) {
+      console.log(`clicked => ${theme}`);
+      await el.click();
+      break;
+    }
+  }
+  await page.close();
+});
