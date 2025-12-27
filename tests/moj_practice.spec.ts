@@ -18,7 +18,7 @@ test('test', async ({ page }) => {
   await page.close();
 });
 
-test("Conditional theme click", async ({ page }) => {
+test("Conditional theme click", async ({ page }) => {   // Doplneny komentar
   await page.goto("https://playground.bondaracademy.com/pages/iot-dashboard");
 
   // 1️⃣ Open the dropdown (the theme button always shows current theme)
